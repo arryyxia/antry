@@ -1,8 +1,6 @@
 <template>
-	<Navbar :navItems="navItems" />
-
-	<div class="max-w-full lg:max-w-[800px] relative top-20 mx-auto h-full bg-white">
-		<RouterView></RouterView>
+	<div class="max-w-full xl:max-w-[1140] 2xl:max-w-[1320px] lg:max-w-[960px] mx-auto px-2">
+		<slot></slot>
 	</div>
 </template>
 
