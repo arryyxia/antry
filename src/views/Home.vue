@@ -3,9 +3,9 @@
         <Container>
             <div class="grid grid-cols-12 pb-10">
                 <div class="col-span-12 lg:col-span-7 flex flex-col items-center text-center lg:text-left lg:items-start justify-center px-2 lg:pe-20 order-2 lg:order-1">
-                    <h2 class="text-xl font-normal  text-gray-700">{{ useStore.about.subTitle }}</h2>
+                    <p class="text-xl font-normal  text-gray-700">{{ useStore.about.subTitle }}</p>
                     <h1 class="text-2xl font-semibold text-gray-700 mb-4">{{ useStore.about.description }}</h1>
-                    <Button label="Daftar Sekarang" icon="pi pi-whatsapp" class="w-fit" severity="success" size="large"></Button>
+                    <Button label="Daftar Menjadi Mitra" icon="pi pi-whatsapp" class="w-fit" size="large"></Button>
                 </div>
                 <div class="col-span-12 lg:col-span-5 flex w-full justify-end order-1 lg:order-2 ">
                     <DeferredContent>
@@ -17,20 +17,18 @@
     </div>
 
     <Container>
-
         <Section sectionId="produk">
             <SectionTitle title="Produk-Produk Antry" subTitle="Hingga saat ini produk-produk ANTRY telah banyak tersebar diseluruh wilayah Indonesia hingga kemanca negara dan memberikan manfaat bagi seluruh penggunanya." />
-
-            <Carousel :value="useStore.products" :numVisible="3" :numScroll="1" :responsiveOptions="responsiveOptions" circular :autoplayInterval="3000">
+            <Carousel :value="useStore.products" :numVisible="3" :numScroll="1" :responsiveOptions="useStore.responsiveOptions" circular :autoplayInterval="3000">
                 <template #item="slotProps">
-                    <Card class="shadow-md mx-1 mb-2 flex flex-col items-center">
+                    <Card class="shadow-md mx-1 flex flex-col items-center h-full">
                         <template #title>
+                            <h4 class="text-gray-700">{{ slotProps.data.title }}</h4>
+                        </template>
+                        <template #content>
                             <DeferredContent>
                                 <img :src="this.default.domain + 'thumbnail-' + slotProps.data.image" :alt="slotProps.data.title" class="w-full h-[350px] rounded object-cover" />
                             </DeferredContent>
-                        </template>
-                        <template #content>
-                            <h4 class="text-gray-700">{{ slotProps.data.title }}</h4>
                         </template>
                     </Card>
                 </template>
@@ -39,7 +37,6 @@
 
         <Section sectionId="faq" class="grid grid-cols-12 items-center">
             <SectionTitle class="col-span-12 lg:col-span-4 text-start" title="Pertanyaan Yang Sering Ditanyakan" subTitle="Beberapa pertanyaan yang biasa ditanyakan calon mitra kami." />
-
             <Card class="col-span-12 lg:col-span-8 shadow-md">
                 <template #title>
                     
@@ -50,7 +47,7 @@
                             <AccordionHeader>{{ tab.title }}</AccordionHeader>
                             <AccordionContent>
                                 <p class="m-0">{{ tab.content }}</p>
-                                <ul class="list-disc list-inside">
+                                <ul class="list-disc px-4">
                                     <li v-for="item in tab.list" :key="item.title">{{ item.title }}</li>
                                 </ul>
                                 <p class="m-0">{{ tab.subContent }}</p>
@@ -63,17 +60,16 @@
 
         <Section sectionId="keuntungan-mitra">
             <SectionTitle title="Apa saja yang kalian dapatkan saat berbagung menjadi Mitra ANTRY?" subTitle="ANTRY juga memiliki program reward bagi semua Mitranya. Reward yang kalian bisa dapatkan tergantung dari jumlah pesanan yang kalian order. Bukan hanya itu saja, kalian juga berhak mendapatkan Reward Plus dari ANTRY sesuai dengan ketentuan yang berlaku. Berikut daftar reward dari Produk ANTRY :" />
-
             <div class="grid grid-cols-12 gap-3">
                 <Card v-for="rewardItem in useStore.rewardItems" :key="rewardItem.title" class="col-span-12 lg:col-span-6 shadow-md">
                     <template #title>
                         {{ rewardItem.title }}
                     </template>
                     <template #content>
-                        <div class="flex flex-col justify-between h-full">
-                            <ul>
+                        <div class="flex flex-col justify-between h-full px-4">
+                            <ol class="list-decimal">
                                 <li v-for="item in rewardItem.items" :key="item.title" class="mb-2">{{ item.title }}</li>
-                            </ul>
+                            </ol>
                             <p class="mt-5">{{ rewardItem.notes }}</p>
                         </div>
                     </template>
@@ -83,8 +79,7 @@
 
         <Section sectionId="testimoni">
             <SectionTitle title="Testimoni Dari Klien Tercinta Kami" subTitle="Daftar testimoni dari berbagai social media dan maket place" />
-
-            <Carousel :value="useStore.testimoniItems" :numVisible="3" :numScroll="1" :responsiveOptions="responsiveOptions" circular :autoplayInterval="3000">
+            <Carousel :value="useStore.testimoniItems" :numVisible="3" :numScroll="1" :responsiveOptions="useStore.responsiveOptions" circular :autoplayInterval="3000">
                 <template #item="slotProps">
                     <div class="mx-1 flex flex-col items-center">
                         <Card class="col-span-12 shadow-md mb-2 w-full">
@@ -104,13 +99,11 @@
 
         <Section sectionId="member">
             <SectionTitle title="Apa Keuntungan Bergabung Menjadi Member ANTRY" subTitle="Hal yang paling penting bagi setiap calon member ANTRY pasti bertanya apasih keuntungan bergabung menjadi Mitra ANTRY?" />
-
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-3">
                 <!-- <div v-for="item in memberItems" :key="item.title" class="col-auto">
                     <h4 class="">{{ item.title }}</h4>
                     <p>{{ item.description }}</p>
                 </div> -->
-                
                 <Card v-for="item in useStore.memberItems" :key="item.title" class="col-auto shadow-md">
                     <template #title>
                         {{ item.title }}
@@ -121,7 +114,6 @@
                 </Card>
             </div>
         </Section>
-
     </Container>
 </template>
 
